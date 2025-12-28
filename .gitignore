@@ -1,0 +1,43 @@
+# Dependências
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build / dist
+dist/
+build/
+
+# Cache
+.cache/
+.tmp/
+.eslintcache
+
+# Coverage (testes)
+coverage/
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# PMs
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
