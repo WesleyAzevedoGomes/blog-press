@@ -7,6 +7,12 @@ router.get('/admin/categories/new', (req, res) => {
   res.render("admin/categories/new")
 })
 
+router.get('/admin/categories', (req, res) => {
+  Category.findAll().then(categories => {
+    res.render('admin/categories/index', { categories })
+  })
+})
+
 router.post('/categories/save', (req, res) => {
   const { title } = req.body;
   if(title){
@@ -17,7 +23,7 @@ router.post('/categories/save', (req, res) => {
       res.redirect('/')
     })
   } else {
-    res.redirect('/admin/categories/new')
+    res.redirect('admin/categories/new')
   }
 })
 
