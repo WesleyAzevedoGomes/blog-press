@@ -27,5 +27,19 @@ router.post('/categories/save', (req, res) => {
   }
 })
 
+router.post("/categories/delete", (req, res) => {
+  const id = Number(req.body.id);
+  if (id || typeof id === Number) {
+    Category.destroy({
+      where: {
+        id,
+      },
+    }).then(() => {
+      res.redirect('/admin/categories')
+    })
+  } else {
+    res.redirect("/admin/categories");
+  }
+});
 
 module.exports = router;

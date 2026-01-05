@@ -14,17 +14,20 @@
         <th>Ações</th>
       </tr>
     </thead>
-    <tbody>
-      <% categories.forEach((categories) => { %>
-        <th><%= categories.id %></th>
-        <th><%= categories.title %></th>
-        <th><%= categories.slug %></th>
-        <th>
-          <button class="btn btn-warning">Editar</button>
-          <button class="btn btn-danger">Deletar</button>
-        </th>
-      <% }) %>
-    </tbody>
+    <% categories.forEach((categories) => { %>
+      <tbody>
+          <th><%= categories.id %></th>
+          <th><%= categories.title %></th>
+          <th><%= categories.slug %></th>
+          <th>
+            <button class="btn btn-warning">Editar</button>
+            <form method="post" action="/categories/delete">
+              <input type="hidden" name="id" value="<%= categories.id %>" style="display: inline;">
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </th>
+      </tbody>
+    <% }) %>
   </table>
 </div>
 <%- include('../../partials/footer.ejs') %>
