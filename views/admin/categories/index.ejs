@@ -14,15 +14,15 @@
         <th>Ações</th>
       </tr>
     </thead>
-    <% categories.forEach((categories) => { %>
+    <% categories.forEach((category) => { %>
       <tbody>
-          <th><%= categories.id %></th>
-          <th><%= categories.title %></th>
-          <th><%= categories.slug %></th>
+          <th><%= category.id %></th>
+          <th><%= category.title %></th>
+          <th><%= category.slug %></th>
           <th>
-            <button class="btn btn-warning">Editar</button>
-            <form method="post" action="/categories/delete" onsubmit="allowDelete(event, this)">
-              <input type="hidden" name="id" value="<%= categories.id %>" style="display: inline;">
+            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+            <form method="post" action="/category/delete" onsubmit="allowDelete(event, this)">
+              <input type="hidden" name="id" value="<%= category.id %>" style="display: inline;">
               <button class="btn btn-danger">Deletar</button>
             </form>
           </th>
