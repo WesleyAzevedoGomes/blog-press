@@ -34,4 +34,20 @@ router.post('/articles/save', (req, res) => {
   })
 })
 
+router.post('/articles/delete', (req, res) => {
+  const id = Number(req.body.id);
+  console.log(id)
+  if (id || typeof id === Number) {
+    Article.destroy({
+      where: {
+        id,
+      },
+    }).then(() => {
+      res.redirect('/admin/articles')
+    })
+  } else {
+    res.redirect('/admin/articles');
+  }
+});
+
 module.exports = router;

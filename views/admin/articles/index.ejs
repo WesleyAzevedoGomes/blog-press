@@ -21,7 +21,13 @@
           <td><%=article.title %> </td>
           <td><%=article.slug %> </td>
           <td><%=article.category.title %> </td>
-          <td>Ações </td>
+          <td>
+            <!-- <a href="/articles/delete" class="btn btn-warning">Editar</a> -->
+            <form method="post" action="/articles/delete" onsubmit="allowDelete(event, this)">
+              <input type="hidden" name="id" value="<%= article.id %>" style="display: inline;">
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
         <% }) %>
       </tbody>
   </table>
@@ -30,7 +36,7 @@
 <script>
   function allowDelete(e, form) {
     e.preventDefault();
-    const decision = confirm("Você realmente deseja deletar está categoria? ")
+    const decision = confirm("Você realmente deseja deletar este artigo? ")
     if(decision) form.submit();
   }
 </script>
