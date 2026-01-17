@@ -35,6 +35,23 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/:slug', (req, res) => {
+  const slug = req.params.slug;
+  Article.findOne({
+    where: {
+      slug
+    }
+  }).then((article) => {
+    if(article){
+      res.render('article', {article})
+    } else {
+      res.redirect('/')
+    }
+  }).catch((err) => {
+    res.redirect('/')
+  })
+})
+
 app.listen(3000, (() => {
   console.log('App rodando!')
 }))
