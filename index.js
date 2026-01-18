@@ -6,7 +6,7 @@ const connection = require('./database/database')
 const categoriesController = require('./categories/CategoriesController')
 const articlesController = require('./articles/ArticlesController')
 const Article = require('./articles/Articles')
-const Category = require('./categories/Category')
+const Category = require('./categories/Category');
 
 
 // View engine
@@ -48,7 +48,7 @@ app.get('/:slug', (req, res) => {
       slug
     }
   }).then((article) => {
-    if(article != undefined){
+    if(article){
       Category.findAll().then(categories => {
         res.render('article', {article: article, categories: categories})
       })
@@ -59,6 +59,25 @@ app.get('/:slug', (req, res) => {
     res.redirect('/')
   })
 })
+
+app.get("/category/:slug", (req, res) => {
+  const slug = req.params.slug;
+  Category.findOne({
+    where: { slug },
+    include: [{ model: Article }],
+  }).then((category) => {
+      if (category) {
+        Category.findAll().then((categories) => {
+          res.render('index', {articles: category.articles, categories})
+        })
+      } else {
+        res.redirect("/");
+      }
+    })
+    .catch((err) => {
+      res.redirect("/");
+    });
+});
 
 app.listen(3000, (() => {
   console.log('App rodando!')
