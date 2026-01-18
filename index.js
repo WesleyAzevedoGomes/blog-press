@@ -32,10 +32,12 @@ app.use('/', articlesController)
 app.get('/', (req, res) => {
   Article.findAll({
     order: [
-      ['id', 'desc']
+      ['id', 'DESC']
     ]
   }).then((articles) => {
-    res.render('index', {articles})
+    Category.findAll().then(categories => {
+        res.render('index', {articles, categories: categories})
+      })
   })
 })
 
@@ -46,8 +48,10 @@ app.get('/:slug', (req, res) => {
       slug
     }
   }).then((article) => {
-    if(article){
-      res.render('article', {article})
+    if(article != undefined){
+      Category.findAll().then(categories => {
+        res.render('article', {article: article, categories: categories})
+      })
     } else {
       res.redirect('/')
     }
