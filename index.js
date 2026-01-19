@@ -16,12 +16,19 @@ const User = require('./user/User')
 app.set('view engine', 'ejs')
 
 // Express session
-app.use(session({
-  secret: "qualquercoisa",
-  cookie: {
-    maxAge: 30000
-  }
-}))
+
+app.use(
+  session({
+    secret: 'sua_chave_secreta',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 30000,
+      secure: false // true apenas se usar HTTPS
+    }
+  })
+)
+
 
 // Static
 app.use(express.static('public'))
